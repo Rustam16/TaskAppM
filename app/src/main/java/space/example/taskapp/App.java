@@ -17,4 +17,12 @@ public class App  extends Application {
                 .allowMainThreadQueries()
                 .build();
     }
+
+    public static AppDataBase getAppDataBase() {
+        return appDataBase;
+    }
+
+    public static void setAppDataBase(AppDataBase appDataBase) {
+        App.appDataBase = appDataBase;
+    }
 }

@@ -20,6 +20,7 @@ import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -30,14 +31,19 @@ import space.example.taskapp.Prefs;
 import space.example.taskapp.R;
 import space.example.taskapp.ui.home.HomeFragment;
 
+import static space.example.taskapp.R.raw.editor;
+import static space.example.taskapp.R.raw.girl;
+import static space.example.taskapp.R.raw.settings;
+
 public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> {
 
     public String[] titles = new String[]{"fast", "conveniently", "setting"};
     String[] description = new String[]{"You can quickly rewrite with another",
             "convenient to use in everyday life",
             "convenient use of settings"};
+    private final int[] images = new int[]{settings,girl,editor};
     private OnItemClickListener onItemClickListener;
-    FragmentManager manager;
+    LottieAnimationView lottie;
 
     @NonNull
     @Override
@@ -65,15 +71,15 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtTitle, txtDesc, tv_skip;
         Button btnStart;
-        ImageView imgView;
+        private LottieAnimationView lottieView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtTitle = itemView.findViewById(R.id.txtTitle);
             txtDesc = itemView.findViewById(R.id.txtDesc);
             btnStart = itemView.findViewById(R.id.btnStart);
-            imgView = itemView.findViewById(R.id.imageView);
             tv_skip = itemView.findViewById(R.id.tvSkip);
+            lottieView = itemView.findViewById(R.id.lottie_anim);
 
             btnStart.setOnClickListener(v -> {
                 onItemClickListener.onClick(getAdapterPosition());
@@ -90,17 +96,7 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
         public void bind(int position) {
             txtTitle.setText(titles[(position)]);
             txtDesc.setText(description[(position)]);
-            switch (position) {
-                case 0:
-                    imgView.setImageResource(R.drawable.fast);
-                    break;
-                case 1:
-                    imgView.setImageResource(R.drawable.onbic);
-                    break;
-                case 2:
-                    imgView.setImageResource(R.drawable.settings);
-                    break;
-            }
+            lottieView.setAnimation(images[position]);
             if (position == titles.length - 1) btnStart.setVisibility(View.VISIBLE);
             else btnStart.setVisibility(View.INVISIBLE);
             if (position == titles.length - 3) tv_skip.setVisibility(View.VISIBLE);

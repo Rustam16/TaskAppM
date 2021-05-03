@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.home.FormFragment"
     android:orientation="vertical"
     android:padding="16dp">
@@ -12,13 +13,36 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:inputType="textCapSentences"
-    />
+    android:background="@drawable/bg_edit"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:endIconMode="password_toggle"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="qwerty"
+            android:hint="Type"
+            android:inputType="textPassword"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
     <Button
         android:id="@+id/btnSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Save"
-
+        android:layout_marginTop="30dp"
+        />
+    <Button
+        android:text="OK"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/OrangeButtonStyle"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_gradient"
         />
 
 </LinearLayout>

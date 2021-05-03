@@ -1,10 +1,13 @@
 package space.example.taskapp;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -22,7 +25,13 @@ public class MainActivity extends AppCompatActivity {
         initNav();
         Prefs prefs = new Prefs(this);
        if(!prefs.isBoardShown())navController.navigate(R.id.boardFragment);
+       //navController.navigate(R.id.phoneFragment);
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
 
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.custom_image,null);
+        actionBar.setCustomView(view);
     }
 
 

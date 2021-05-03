@@ -1,6 +1,7 @@
 package space.example.taskapp.ui.room;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
@@ -15,4 +16,9 @@ public interface TaskDao {
 
     @Insert
     void insert(Task task);
+    @Delete
+    void delete(Task task);
+
+    @Query("SELECT * FROM task ORDER BY title ASC")
+    List<Task> sortAll();
 }

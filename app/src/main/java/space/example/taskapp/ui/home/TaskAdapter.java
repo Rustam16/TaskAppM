@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import space.example.taskapp.OnItemClickListener;
 import space.example.taskapp.R;
@@ -59,9 +60,10 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         notifyItemInserted(list.size() - 1);
     }
 
-    public ArrayList<Task> getlist() {
+    public ArrayList<Task> getList() {
         return list;
     }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private LinearLayout containerTxtTitle;

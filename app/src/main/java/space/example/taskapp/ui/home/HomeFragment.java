@@ -5,6 +5,9 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -15,7 +18,6 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Delete;
 
 import java.util.List;
 
@@ -62,7 +64,7 @@ public class HomeFragment extends Fragment {
             public void onClick(int position) {
                 positionTo = position;
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("keyToo", adapter.getlist().get(position));
+                bundle.putSerializable("keyToo", adapter.getList().get(position));
                 getParentFragmentManager().setFragmentResult("key", bundle);
                 openForm();
             }
@@ -76,7 +78,7 @@ public class HomeFragment extends Fragment {
         });
         getParentFragmentManager().setFragmentResultListener("keys", getViewLifecycleOwner(), (requestKey, result) -> {
             Task title = (Task) result.getSerializable("tast");
-            adapter.getlist().set(positionTo, title);
+            adapter.getList().set(positionTo, title);
             adapter.notifyDataSetChanged();
         });
 
@@ -95,20 +97,20 @@ public class HomeFragment extends Fragment {
 
     }
 
-        private void alertDialogClick( int position){
-            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-            builder.setTitle("DELETE" + containerTxtTitle + " ?");
-            builder.setMessage("Are you sure you want to delete " + containerTxtTitle + " ?");
-            builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    adapter.getlist().remove(position);
-                    adapter.notifyDataSetChanged();
-                }
-            });
-            builder.setNegativeButton("cancel", null);
-            builder.create();
-            builder.show();
+    private void alertDialogClick(int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("DELETE" + containerTxtTitle + " ?");
+        builder.setMessage("Are you sure you want to delete " + containerTxtTitle + " ?");
+        builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                adapter.getList().remove(position);
+                adapter.notifyDataSetChanged();
+            }
+        });
+        builder.setNegativeButton("cancel", null);
+        builder.create();
+        builder.show();
+    }
 
-        }
 }
